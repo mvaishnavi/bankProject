@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import django_heroku
+import dj-database-url
 LOCAL = False
 
 try:
@@ -83,7 +84,8 @@ WSGI_APPLICATION = 'bankProject.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES[‘default’].update(db_from_env)
 
 DATABASES = {
     'default': {
