@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+{% block title %}Bank Branches{% endblock %}
+{% block content %}
+	{% include "searchbank.html" %}
+    <hr>
+
+	{% if branches|length > 0 %}
+		<p>{{ total_pages }} pages of branches found for {{ bank.name }}{% if city %} in {{city}}.{% else %}.{% endif %}
+		</p>
+		{% if is_paginated %}
+			<ul class="pagination">
+			{% if has_previous %}
+			    <li>
+			        <span><a href="?page={{ page|add:-1 }}">Previous</a></span>
+			    </li>
+			{% endif %}
+			    <li class="">
+			        <span>Page {{ page }} of {{ total_pages }}</span>
+			    </li>
+			{% if has_next %}
+			    <li>
+			        <span><a href="?page={{ page|add:1 }}">Next</a></span>
+			    </li>
+			{% endif %}
+			</ul>
+		{% endif %}
+    	
+    	{% for branch in branches %}
+	    	<div>IFSC:{{ branch.ifsc }}</div>
+		    <div>Branch: {{ branch.branch }}</div>
+		    <div>Address: {{ branch.address }}</div>
+		    <div>City: {{ branch.city }}</div>
+		    <div>District: {{ branch.district }}</div>
+		    <div>State: {{ branch.state }}</div>
+		    <hr>
+		{% endfor %}
+    {% elif error %}
+    	{{error}}
+    {% else %}
+    	No branches found{% if bank and city %} for {{ bank.name }} in {{city}}.{% else %}.{% endif %}
+	{% endif %}
+
+{% endblock %}

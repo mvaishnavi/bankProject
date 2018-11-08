@@ -1,0 +1,19 @@
+{% extends "index.html" %}
+{% block title %}IFSC Details{% endblock %}
+{% block content %}
+	{% include "searchifsc.html" %}
+    <hr>
+    {% if object.error %}
+    	{{object.error}}
+	{% elif object %}
+	    <p>IFSC Details for {{ object.ifsc }}</p>
+	    <div>Bank: {{ object.bank.name }}</div>
+	    <div>Branch: {{ object.branch }}</div>
+	    <div>Address: {{ object.address }}</div>
+	    <div>City: {{ object.city }}</div>
+	    <div>District: {{ object.district }}</div>
+	    <div>State: {{ object.state }}</div>
+    {% else %}
+    	Detail not found.
+	{% endif %}
+{% endblock %}

@@ -1,0 +1,21 @@
+<p>Enter IFSC for Branch Details</p>
+<div class="input-group" style="width: 400px;">
+  <input type="text" class="form-control" id="ifsc" placeholder="Enter IFSC" onkeypress="handleifsc(event)">
+  <span class="input-group-btn">
+    <button class="btn btn-default" type="button" onclick="getifsc();">Go!</button>
+  </span>
+</div>
+<script type="text/javascript">
+    function getifsc(){
+        if (document.getElementById('ifsc').value.length > 0){
+          document.location.href='http://127.0.0.1:8000/ifsc/'+document.getElementById('ifsc').value+'/';
+          document.getElementById('ifsc').value = '';
+        }
+    };
+
+    function handleifsc(e){
+      if(e.keyCode === 13){
+        getifsc();
+      }
+    }
+</script>

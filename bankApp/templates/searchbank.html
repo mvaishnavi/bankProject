@@ -1,0 +1,109 @@
+<p>Enter bank name to get all branches</p>
+<div class="input-group" style="width: 400px;">
+  <div>
+    <input type="text" id="bank_name" placeholder="Enter bank name and select from list" style="width: 358px;" onkeyup="bankautocomplete();">
+    <span class="hide" id="errorbank">Bank not found.</span>
+      <select class="hide" id="selectbank">
+      </select>
+  </div>
+  <div>
+    <input type="text" id="city" placeholder="Enter city and select from list" style="width: 358px;" onkeyup="cityautocomplete();">
+    <span class="hide" id="errorcity">City not found.</span>
+      <select class="hide" id="selectcity">
+      </select>
+  </div>
+
+  <span class="input-group-btn">
+    <button class="btn btn-default disabled" id="go" type="button" onclick="getbranches();">Go!</button>
+  </span>
+</div>
+<script type="text/javascript">
+    function bankautocomplete() {
+        var query = document.getElementById('bank_name').value;
+        var select = $('#selectbank');
+        if (!select.hasClass('hide')){
+            select.addClass('hide');
+        }
+        if (query.length >2){
+            $.ajax({
+                url: "http://127.0.0.1:8000/banks/",
+                data: 'query=' + query,            
+                dataType: "json",
+                type: "GET",
+                success: function (data) {
+                    if (data.length>0){
+
+                        var select = $('#selectbank');
+
+                        select.find('option').remove();
+                        for (var i=0;i<data.length;i++){
+                            $('<option>').val(data[i].pk).text(data[i].fields.name).appendTo(select);
+                        }
+                        select.removeClass('hide');
+                        $('#go').removeClass('disabled');
+                        if (!$('#errorbank').hasClass('hide')){
+                            $('#errorbank').addClass('hide');
+                        }
+
+                }else{
+
+                    $('#errorbank').removeClass('hide');
+
+                    if (!$('#go').hasClass('disabled')){
+                        $('#go').addClass('disabled');
+                    }
+                }
+            }
+            });
+        }
+    };
+
+    function cityautocomplete() {
+        var query = document.getElementById('city').value;
+        var selectcity = $('#selectcity');
+        if (!selectcity.hasClass('hide')){
+            selectcity.addClass('hide');
+        }
+        if (query.length >2){
+            $.ajax({
+                url: "http://127.0.0.1:8000/city/",
+                data: 'query=' + query,            
+                dataType: "json",
+                type: "GET",
+                success: function (data) {
+                    if (data.length>0){
+
+                        var selectcity = $('#selectcity');
+
+                        selectcity.find('option').remove();
+                        for (var i=0;i<data.length;i++){
+                            $('<option>').val(data[i].fields.city).text(data[i].fields.city).appendTo(selectcity);
+                        }
+                        selectcity.removeClass('hide');
+                        if (!$('#errorcity').hasClass('hide')){
+                            $('#errorcity').addClass('hide');
+                        }
+
+                }else{
+
+                    $('#errorcity').removeClass('hide');
+
+                }
+            }
+            });
+        }
+    };
+
+    function getbranches(){
+        var id = document.getElementById('selectbank').value;
+        var city = document.getElementById('selectcity').value;
+        var url = 'http://127.0.0.1:8000/branches/'+id+'/';
+
+        if (city.length>0){
+            url = url+city+'/'
+        }
+
+        document.location.href=url;
+        
+    };
+</script>
