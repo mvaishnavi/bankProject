@@ -33,7 +33,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'yks9z037p^w=-e6rn#lm^x)z+i9z=1)wz^tib-r*!*814qq^+#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if LOCAL:
+if True:
     DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'localhost', 'https://bankbranchesapp.herokuapp.com/']
