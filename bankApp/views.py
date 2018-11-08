@@ -5,10 +5,11 @@ from django.core import serializers
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Banks, Branches
+from django.conf import settings
 
 
 def index(request):
-    return render(request, 'index.html', {})
+    return render(request, 'index.html', {'BASE_URL':settings.BASE_URL})
 
 
 def autocomplete(request):

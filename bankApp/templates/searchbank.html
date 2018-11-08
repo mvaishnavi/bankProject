@@ -26,7 +26,7 @@
         }
         if (query.length >2){
             $.ajax({
-                url: "http://127.0.0.1:8000/banks/",
+                url: "{{BASE_URL}}/banks/",
                 data: 'query=' + query,            
                 dataType: "json",
                 type: "GET",
@@ -66,7 +66,7 @@
         }
         if (query.length >2){
             $.ajax({
-                url: "http://127.0.0.1:8000/city/",
+                url: "{{BASE_URL}}/city/",
                 data: 'query=' + query,            
                 dataType: "json",
                 type: "GET",
@@ -97,7 +97,7 @@
     function getbranches(){
         var id = document.getElementById('selectbank').value;
         var city = document.getElementById('selectcity').value;
-        var url = 'http://127.0.0.1:8000/branches/'+id+'/';
+        var url = '{{BASE_URL}}/branches/'+id+'/';
 
         if (city.length>0){
             url = url+city+'/'

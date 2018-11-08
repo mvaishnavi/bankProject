@@ -8,7 +8,7 @@
 <script type="text/javascript">
     function getifsc(){
         if (document.getElementById('ifsc').value.length > 0){
-          document.location.href='http://127.0.0.1:8000/ifsc/'+document.getElementById('ifsc').value+'/';
+          document.location.href='{{BASE_URL}}/ifsc/'+document.getElementById('ifsc').value+'/';
           document.getElementById('ifsc').value = '';
         }
     };
