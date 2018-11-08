@@ -2,21 +2,23 @@
 <div class="input-group" style="width: 400px;">
   <div>
     <input type="text" id="bank_name" placeholder="Enter bank name and select from list" style="width: 358px;" onkeyup="bankautocomplete();">
-    <span class="hide" id="errorbank">Bank not found.</span>
-      <select class="hide" id="selectbank">
-      </select>
+    <select class="hide" id="selectbank" style="width: 358px;"></select>
+  </div>
+  <div>
+      <span class="hide" id="errorbank">Bank not found.</span>
   </div>
   <div>
     <input type="text" id="city" placeholder="Enter city and select from list" style="width: 358px;" onkeyup="cityautocomplete();">
-    <span class="hide" id="errorcity">City not found.</span>
-      <select class="hide" id="selectcity">
-      </select>
+    <select class="hide" id="selectcity" style="width: 358px;"></select>
   </div>
-
-  <span class="input-group-btn">
-    <button class="btn btn-default disabled" id="go" type="button" onclick="getbranches();">Go!</button>
-  </span>
+  <div>
+      <span class="hide" id="errorcity">City not found.</span>
+  </div>
 </div>
+<div class="input-group-btn">
+    <button class="btn btn-default disabled" id="go" type="button" onclick="getbranches();">Get branches</button>
+</div>
+
 <script type="text/javascript">
     function bankautocomplete() {
         var query = document.getElementById('bank_name').value;
