@@ -35,7 +35,7 @@ SECRET_KEY = 'yks9z037p^w=-e6rn#lm^x)z+i9z=1)wz^tib-r*!*814qq^+#'
 if LOCAL:
     DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [‘0.0.0.0’, ‘localhost’, 'https://bankbranchesapp.herokuapp.com/']
 
 
 # Application definition
@@ -88,10 +88,9 @@ WSGI_APPLICATION = 'bankProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': os.environ.get('DBNAME'),
-        'NAME': 'bank',
-        'USER': 'bankuser',
-        'PASSWORD': 'serverkey',
+        'NAME': os.environ.get('DBNAME'),
+        'USER': os.environ.get('DBUSER'),
+        'PASSWORD': os.environ.get('DBPASSWORD'),
         'HOST': 'localhost',
         'PORT': '',
     }
