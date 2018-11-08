@@ -106,8 +106,10 @@ DATABASES = {
     }
 }
 
-db_from_env = dj_database_url.parse("postgres://"+DBUSER+":"+DBPASSWORD+"@localhost:5432/"+DBNAME, 
-    conn_max_age=600)
+if LOCAL:
+    db_from_env = dj_database_url.parse("postgres://"+DBUSER+":"+DBPASSWORD+"@localhost:5432/"+DBNAME, 
+        conn_max_age=600)
+db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
 
 # Password validation
