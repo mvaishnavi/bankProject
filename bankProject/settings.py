@@ -15,11 +15,17 @@ import django_heroku
 import dj_database_url
 LOCAL = False
 BASE_URL = "https://bankbranchesapp.herokuapp.com"
-DEBUG = False
+DEBUG = True
+DBNAME = os.environ.get('DBNAME', None)
+DBUSER = os.environ.get('DBUSER', None)
+DBPASSWORD = os.environ.get('DBPASSWORD', None)
 
 try:
     import local
     LOCAL = True
+    DBNAME = local.DBNAME
+    DBUSER = local.DBUSER
+    DBPASSWORD = local.DBPASSWORD
 except:
     pass
 
@@ -92,21 +98,18 @@ WSGI_APPLICATION = 'bankProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DBNAME'),
-        'USER': os.environ.get('DBUSER'),
-        'PASSWORD': os.environ.get('DBPASSWORD'),
+        'NAME': DBNAME,
+        'USER': DBUSER,
+        'PASSWORD': DBPASSWORD,
         'HOST': 'localhost',
         'PORT': '',
     }
 }
 
-# db_from_env = dj_database_url.parse("postgres://"+DATABASES['default'].get('DBUSER')+":"+DATABASES['default'].get('DBPASSWORD')+"@localhost:5432/"+DATABASES['default'].get('DBNAME'), 
-    # conn_max_age=600)
-db_from_env = dj_database_url.parse("postgres://bankuser:serverkey@localhost:5432/bank", 
+db_from_env = dj_database_url.parse("postgres://"+DBUSER+":"+DBPASSWORD+"@localhost:5432/"+DBNAME, 
     conn_max_age=600)
-print('db_from_env', db_from_env, DATABASES['default'])
 DATABASES['default'].update(db_from_env)
-print('db_from_env final', DATABASES['default'])
+
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
