@@ -36,7 +36,7 @@ SECRET_KEY = 'yks9z037p^w=-e6rn#lm^x)z+i9z=1)wz^tib-r*!*814qq^+#'
 if LOCAL:
     DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'https://bankbranchesapp.herokuapp.com/']
+ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'localhost', 'https://bankbranchesapp.herokuapp.com/']
 
 
 # Application definition
