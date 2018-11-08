@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import django_heroku
-import dj-database-url
+import dj_database_url
 LOCAL = False
 
 try:
@@ -36,7 +36,7 @@ SECRET_KEY = 'yks9z037p^w=-e6rn#lm^x)z+i9z=1)wz^tib-r*!*814qq^+#'
 if LOCAL:
     DEBUG = True
 
-ALLOWED_HOSTS = [‘0.0.0.0’, ‘localhost’, 'https://bankbranchesapp.herokuapp.com/']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'https://bankbranchesapp.herokuapp.com/']
 
 
 # Application definition
@@ -84,8 +84,7 @@ WSGI_APPLICATION = 'bankProject.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES[‘default’].update(db_from_env)
+
 
 DATABASES = {
     'default': {
@@ -98,7 +97,8 @@ DATABASES = {
     }
 }
 
-
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
